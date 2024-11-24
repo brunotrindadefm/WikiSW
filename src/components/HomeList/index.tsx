@@ -1,30 +1,29 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Card } from "../Card";
-import { Text } from "../Text";
+import { Card, Text } from "../index";
+import { ListContainer } from "./styles";
+import { theme } from "../../styles";
 
-const FakeData = [
-  {
-    id: 1,
-    imageUrl: "https://tinyurl.com/mjj2h933",
-  },
-  {
-    id: 2,
-    imageUrl: "https://tinyurl.com/3xv6wbe9",
-  },
-  {
-    id: 3,
-    imageUrl: "https://tinyurl.com/2a3stp6w",
-  },
-];
+interface HomeListProps {
+  data: any[];
+  title: string
+}
 
-export const HomeList = () => {
-  return ( 
-  <FlatList
-   horizontal
-   data={FakeData} 
-   renderItem={({ item }) => <Card item={item}/>}
-   keyExtractor={(item) => item.id.toString()}
-   />
-)
+export const HomeList: React.FC<HomeListProps> = ({ data, title }) => {
+  return (
+    <ListContainer>
+      <Text ml={12} fontFamily='black' size={18} text={title} />
+      <FlatList
+        horizontal
+        data={data}
+        renderItem={({ item }) => <Card item={item} />}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{
+          paddingLeft: theme.metrics.px(12),
+          paddingTop: theme.metrics.px(12),
+          paddingBottom: theme.metrics.px(16)
+        }}
+      />
+    </ListContainer>
+  );
 };

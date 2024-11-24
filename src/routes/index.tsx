@@ -1,12 +1,12 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "../screens";
-import { SplashScreen } from "../screens";
+import { Details, Home, SplashScreen } from "../screens";
 
 type RootStackParamList = {
     splash: undefined;
     home: undefined;
+    details: undefined
   };    
 
 export const Routes = () => {
@@ -17,6 +17,7 @@ export const Routes = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="splash" component={SplashScreen}/>
         <Stack.Screen name="home" component={Home}/> 
+        <Stack.Screen name="details" component={Details}/> 
       </Stack.Navigator>
     </NavigationContainer>
   );

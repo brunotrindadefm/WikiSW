@@ -1,3 +1,4 @@
+import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 
 interface ContainerProps {
@@ -24,3 +25,7 @@ export const Container = styled.View<ContainerProps>`
   width: ${({ w, theme }) => (w ? `${theme.metrics.px(w)}px` : "100%")};
   height: ${({ h, theme }) => (h ? `${theme.metrics.px(h)}px` : "100%")};
 `;
+
+export const ScreenScrollContainer = styled(ScrollView)<ContainerProps>`
+  background-color: ${({ bg, theme }) => theme.colors[bg || 'grey']};
+`

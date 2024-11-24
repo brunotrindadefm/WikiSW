@@ -1,24 +1,29 @@
-import React, {useEffect} from "react";
-import { Logo } from "../../components";
-import { Container, Text } from "../../components";
+import React, { useEffect } from "react";
+import { Container, Text, Logo } from "../../components";
+import * as splashScreen from "expo-splash-screen";
 import { NavigationProp } from "@react-navigation/native";
 
 interface SplashScreenProps {
-  navigation: NavigationProp<any>
-} 
+  navigation: NavigationProp<any>;
+}
 
 export const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
-
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate('home')
-    }, 5000)
+    splashScreen.preventAutoHideAsync();
 
-  }, [navigation])
+    const timer = setTimeout(() => {
+      navigation.navigate('home');
+
+      splashScreen.hideAsync();
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [navigation]);
+
   return (
     <Container align="center" justify="center">
-      <Logo />
-      <Text logoText="Star Wars - Wiki" />
+      <Logo size="large" />
+      <Text mt={9} fontFamily="semibold" text="Star Wars - Wiki" />
     </Container>
   );
 };

@@ -1,6 +1,12 @@
 import styled from "styled-components/native";
+import { Image } from "react-native";
 
-export const LogoImage = styled.Image`
-  height: 118px;
-  width: 118px;
+interface LogoImageProps {
+  size: number,
+  source: string
+}
+
+export const LogoImage = styled(Image)<LogoImageProps>`
+  height: ${({ size, theme }) => theme.metrics.px(size)}px;
+  width: ${({ size, theme }) => theme.metrics.px(size)}px;
 `;

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import 'react-native-gesture-handler'
+import * as splashScreen from "expo-splash-screen";
 import { ThemeProvider } from "styled-components";
 import { Routes } from "./src/routes";
 import { theme } from "./src/styles";
@@ -10,7 +11,6 @@ import {
   SourceSansPro_600SemiBold,
   SourceSansPro_900Black,
 } from "@expo-google-fonts/source-sans-pro";
-import AppLoading from "expo-app-loading";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -20,8 +20,16 @@ export default function App() {
     SourceSansPro_900Black,
   });
 
+  useEffect(() => {
+    splashScreen.preventAutoHideAsync();
+    
+    if (fontsLoaded) {
+      splashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (
